@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập - GemFlix</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/variables.css?v=1">
+    <link rel="stylesheet" href="css/style.css?v=1">
+    <link rel="stylesheet" href="css/components.css?v=1">
+    <link rel="stylesheet" href="css/responsive.css?v=1">
+    <link rel="stylesheet" href="css/auth.css?v=1">
+</head>
+
+<body>
+
+    <header class="main-header" style="justify-content: l;">
+        <a href="index.html" class="logo" style="font-size: 2.5rem;">GemFlix</a>
+    </header>
+
+    <main>
+        <div class="auth-container">
+            <div class="auth-form-box">
+                <h2>Đăng Nhập</h2>
+                
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input id="email" type="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mật khẩu</label>
+                        <input id="password" type="password" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Đăng Nhập</button>
+                </form>
+                
+                <p class="auth-switch-link">
+                    Chưa có tài khoản? <a href="register.html">Đăng kí ngay</a>
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2025 Web Xem Phim. Mọi bản quyền thuộc về bạn.</p>
+    </footer>
+
+    <div class="modal-trailer" id="trailer-modal">
+        <div class="modal-content">
+            <span class="modal-close" id="modal-close-btn">&times;</span>
+            <div class="video-container">
+                <iframe id="trailer-iframe" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+    <script src="js/auth.js?v=1"></script>  
+</body>
+</html>

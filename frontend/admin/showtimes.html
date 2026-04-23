@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Lịch Chiếu - Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <link rel="stylesheet" href="../css/variables.css">
+
+    <style>
+        /* --- ⭐ 2. CẤU HÌNH DARK THEME --- */
+        body { 
+            margin: 0; 
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+            display: flex; 
+            background-color: var(--dark-color); /* Nền đen #141414 */
+            color: var(--light-color); /* Chữ trắng */
+        }
+
+        /* SIDEBAR */
+        .sidebar { 
+            width: 250px; 
+            background-color: black; 
+            color: #fff; 
+            height: 100vh; 
+            position: fixed; 
+            border-right: 1px solid #333;
+        }
+        .sidebar .logo { 
+            padding: 20px; 
+            font-size: 2rem; 
+            font-weight: bold; 
+            color: var(--primary-color); 
+            text-align: center; 
+            border-bottom: 1px solid #333; 
+        }
+        .sidebar ul { list-style: none; padding: 0; margin: 0; }
+        .sidebar li a { 
+            display: block; 
+            padding: 15px 20px; 
+            color: #999; 
+            text-decoration: none; 
+            transition: 0.3s; 
+            border-left: 3px solid transparent;
+        }
+        .sidebar li a:hover, .sidebar li a.active { 
+            background-color: #222; 
+            color: #fff; 
+            border-left-color: var(--primary-color); 
+        }
+        .sidebar li a i { margin-right: 10px; width: 20px; }
+
+        /* MAIN CONTENT */
+        .main-content { 
+            margin-left: 250px; 
+            flex: 1; 
+            padding: 20px; 
+            background-color: var(--dark-color); 
+        }
+
+        /* HEADER */
+        .header { 
+            background-color: var(--light-dark-color); 
+            padding: 15px 30px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 1px solid #333;
+            border-radius: 8px;
+            margin-bottom: 30px; 
+        }
+        .admin-profile { color: #ccc; }
+        .admin-profile strong { color: var(--primary-color); }
+
+        /* CONTENT BOX (Chứa bảng) */
+        .content-box {
+            background-color: var(--light-dark-color);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+
+        .box-header {
+            display: flex; 
+            justify-content: space-between; 
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        /* TABLE */
+        .data-table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            color: #ddd;
+        }
+        .data-table th { 
+            background-color: #222; 
+            padding: 15px; 
+            text-align: left; 
+            border-bottom: 2px solid #444; 
+            color: #fff;
+        }
+        .data-table td { 
+            padding: 15px; 
+            border-bottom: 1px solid #333; 
+        }
+        .data-table tr:hover { background-color: rgba(255,255,255,0.05); }
+
+        /* BUTTONS */
+        .btn-add-new {
+            background: var(--primary-color); 
+            color: #fff; 
+            border: none; 
+            padding: 10px 20px; 
+            border-radius: 4px; 
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn-add-new:hover { background-color: #b20710; }
+
+        .btn-action { 
+            padding: 5px 10px; 
+            border: none; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            margin-right: 5px; 
+            font-size: 0.85rem;
+        }
+        .btn-delete { 
+            background: rgba(231, 76, 60, 0.2); 
+            color: #e74c3c; 
+            border: 1px solid #e74c3c;
+        }
+        .btn-delete:hover { background: #e74c3c; color: white; }
+
+        /* MODAL DARK THEME */
+        .modal-overlay { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.8); z-index: 1000; 
+            display: none; justify-content: center; align-items: center; 
+            backdrop-filter: blur(5px);
+        }
+        .modal-content { 
+            background: var(--light-dark-color); 
+            color: var(--light-color);
+            border: 1px solid #444;
+            padding: 30px; 
+            border-radius: 8px; 
+            width: 500px; 
+            max-width: 90%; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: bold; color: #ccc; }
+        
+        /* INPUT & SELECT DARK */
+        .form-group select, .form-group input { 
+            width: 100%; 
+            padding: 10px; 
+            background-color: var(--dark-color);
+            border: 1px solid #555; 
+            border-radius: 4px; 
+            color: white;
+            outline: none;
+        }
+        .form-group select:focus, .form-group input:focus {
+            border-color: var(--primary-color);
+        }
+
+        .btn-save { 
+            background: var(--primary-color); 
+            color: white; 
+            padding: 10px 20px; 
+            border: none; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-weight: bold;
+        }
+        .btn-save:hover { background: #b20710; }
+
+        .btn-cancel { 
+            background: transparent; 
+            color: #ccc; 
+            padding: 10px 20px; 
+            border: 1px solid #555; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            margin-right: 10px; 
+        }
+        .btn-cancel:hover { background: #333; color: white; }
+
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="logo">GemFlix ADMIN</div>
+        <ul>
+            <li><a href="index.html"><i class="fa-solid fa-chart-line"></i> Tổng Quan & Phim</a></li>
+            <li><a href="showtimes.html" class="active"><i class="fa-solid fa-calendar-days"></i> Lịch Chiếu</a></li>
+            <li><a href="customers.html"><i class="fa-solid fa-users"></i> Khách Hàng</a></li>
+            <li><a href="#" id="admin-logout"><i class="fa-solid fa-right-from-bracket"></i> Đăng Xuất</a></li>
+        </ul>
+    </aside>
+
+    <div class="main-content">
+        <div class="header">
+            <h2>Quản Lý Lịch Chiếu</h2>
+            <div class="admin-profile">Xin chào, <strong id="admin-name">Admin</strong></div>
+        </div>
+
+        <div class="content-box">
+            <div class="box-header">
+                <h3>Danh Sách Suất Chiếu</h3>
+                <button onclick="openAddModal()" class="btn-add-new"><i class="fa-solid fa-plus"></i> Thêm Suất Chiếu</button>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Phim</th>
+                        <th>Ngày</th>
+                        <th>Giờ</th>
+                        <th>Phòng</th>
+                        <th>Giá Vé</th>
+                        <th>Hành Động</th>
+                    </tr>
+                </thead>
+                <tbody id="showtime-list"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="showtime-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2 style="margin-bottom: 20px; color: var(--primary-color);">Thêm Lịch Chiếu Mới</h2>
+            <form id="showtime-form">
+                <div class="form-group">
+                    <label>Chọn Phim</label>
+                    <select id="st-movie" required>
+                        <option value="">-- Chọn phim --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Chọn Phòng</label>
+                    <select id="st-room" required>
+                        <option value="1">Phòng 1</option>
+                        <option value="2">Phòng 2</option>
+                    </select>
+                </div>
+                <div style="display:flex; gap:15px;">
+                    <div class="form-group" style="flex:1">
+                        <label>Ngày Chiếu</label>
+                        <input type="date" id="st-date" required>
+                    </div>
+                    <div class="form-group" style="flex:1">
+                        <label>Giờ Chiếu</label>
+                        <input type="time" id="st-time" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Giá Vé (VND)</label>
+                    <input type="number" id="st-price" value="75000">
+                </div>
+                <div style="text-align:right; margin-top:20px;">
+                    <button type="button" class="btn-cancel" onclick="document.getElementById('showtime-modal').style.display='none'">Hủy</button>
+                    <button type="submit" class="btn-save">Lưu Lịch</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = "http://localhost/LT-Web_Dat-Ve-Xem-Phim/backend/api";
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            await checkAdminAccess();
+            loadShowtimes();
+            loadMoviesForSelect();
+
+            document.getElementById('admin-logout').addEventListener('click', async (e) => {
+                e.preventDefault();
+                await fetch(`${API_BASE_URL}/auth/logout.php`, {credentials: 'include'});
+                window.location.href = '../index.html';
+            });
+
+            document.getElementById('showtime-form').addEventListener('submit', handleAddShowtime);
+        });
+
+        async function checkAdminAccess() {
+            try {
+                const res = await fetch(`${API_BASE_URL}/auth/me.php`, {credentials: 'include'});
+                const user = await res.json();
+                if (!res.ok || user.role !== 'admin') { window.location.href = '../index.html'; } 
+                else { document.getElementById('admin-name').textContent = user.username; }
+            } catch (e) { window.location.href = '../login.html'; }
+        }
+
+        async function loadShowtimes() {
+            try {
+                const res = await fetch(`${API_BASE_URL}/admin/showtimes_list.php`, {credentials: 'include'});
+                const list = await res.json();
+                const tbody = document.getElementById('showtime-list');
+                
+                if(list.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:20px;">Chưa có lịch chiếu nào.</td></tr>';
+                    return;
+                }
+
+                tbody.innerHTML = list.map(s => `
+                    <tr>
+                        <td>#${s.id}</td>
+                        <td style="font-weight:bold; color:white;">${s.movie_title}</td>
+                        <td>${s.show_date}</td>
+                        <td style="color:var(--primary-color); font-weight:bold">${s.show_time.substring(0,5)}</td>
+                        <td>${s.room_name}</td>
+                        <td style="color:#2ecc71; font-weight:bold">${parseInt(s.price).toLocaleString()} đ</td>
+                        <td>
+                            <button class="btn-action btn-delete" onclick="deleteShowtime(${s.id})"><i class="fa-solid fa-trash"></i> Xóa</button>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch(e) { console.error(e); }
+        }
+
+        async function loadMoviesForSelect() {
+            try {
+                const res = await fetch(`${API_BASE_URL}/movies/list.php`);
+                const movies = await res.json();
+                const select = document.getElementById('st-movie');
+                movies.forEach(m => {
+                    const opt = document.createElement('option');
+                    opt.value = m.id;
+                    opt.textContent = m.title;
+                    select.appendChild(opt);
+                });
+            } catch(e) {}
+        }
+
+        function openAddModal() {
+            document.getElementById('showtime-modal').style.display = 'flex';
+        }
+
+        async function handleAddShowtime(e) {
+            e.preventDefault();
+            const payload = {
+                movie_id: document.getElementById('st-movie').value,
+                room_id: document.getElementById('st-room').value,
+                show_date: document.getElementById('st-date').value,
+                show_time: document.getElementById('st-time').value,
+                price: document.getElementById('st-price').value
+            };
+
+            try {
+                const res = await fetch(`${API_BASE_URL}/admin/showtimes_create.php`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(payload),
+                    credentials: 'include'
+                });
+                
+                const data = await res.json();
+                if(res.ok) {
+                    alert("✅ " + data.message);
+                    document.getElementById('showtime-modal').style.display='none';
+                    loadShowtimes();
+                } else {
+                    alert("❌ " + data.message);
+                }
+            } catch(err) { alert("Lỗi kết nối"); }
+        }
+
+        async function deleteShowtime(id) {
+            if(!confirm("Bạn có chắc muốn xóa lịch này?")) return;
+            try {
+                await fetch(`${API_BASE_URL}/admin/showtimes_delete.php`, {
+                    method: 'POST',
+                    body: JSON.stringify({id: id}),
+                    credentials: 'include'
+                });
+                loadShowtimes();
+            } catch(e) { alert("Lỗi xóa"); }
+        }
+    </script>
+</body>
+</html>

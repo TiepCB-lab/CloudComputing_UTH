@@ -1,0 +1,624 @@
+.profile-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 4%;
+    gap: 30px;
+    min-height: 60vh;
+}
+
+/* --- SIDEBAR --- */
+.profile-sidebar {
+    width: 280px;
+    background-color: var(--light-dark-color);
+    border-radius: 8px;
+    padding: 30px 20px;
+    height: fit-content;
+}
+
+.profile-user-info {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 20px;
+}
+
+.profile-avatar {
+    width: 80px;
+    height: 80px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: #fff;
+}
+
+.profile-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.menu-btn {
+    background: transparent;
+    border: none;
+    color: var(--grey-color);
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.menu-btn i { width: 20px; }
+
+.menu-btn:hover, .menu-btn.active {
+    background-color: rgba(255,255,255,0.1);
+    color: var(--light-color);
+}
+
+.menu-btn.active {
+    border-left: 3px solid var(--primary-color);
+}
+
+.logout-btn:hover {
+    color: var(--primary-color);
+    background-color: rgba(229, 9, 20, 0.1);
+}
+
+/* --- CONTENT --- */
+.profile-content {
+    flex: 1;
+    background-color: var(--light-dark-color);
+    border-radius: 8px;
+    padding: 40px;
+}
+
+.content-section { display: none; animation: fadeIn 0.3s ease; }
+.content-section.active { display: block; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+.profile-content h2 {
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 10px;
+}
+
+/* Form Styles (Legacy) */
+.form-group-row {
+    display: flex;
+    gap: 20px;
+}
+.form-group-row .form-group { flex: 1; }
+
+/* Voucher Styles */
+.membership-card {
+    background: linear-gradient(45deg, #b92b27, #1565C0);
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+.membership-card h4 { font-size: 1.5rem; margin-bottom: 5px; }
+
+.voucher-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+.voucher-item {
+    background-color: var(--dark-color);
+    border: 1px dashed var(--primary-color);
+    padding: 15px;
+    border-radius: 6px;
+}
+.voucher-code {
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.voucher-item.voucher-disabled {
+    opacity: 0.6;
+    background-color: #2a2a2a; /* Màu tối hơn */
+    border-color: #555; /* Viền xám thay vì đỏ */
+    cursor: not-allowed;
+    filter: grayscale(100%);
+}
+
+.voucher-item.voucher-disabled .voucher-code {
+    color: #999;
+    text-decoration: line-through; 
+}
+
+/* Switch Toggle for Settings */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+input:checked + .slider { background-color: var(--primary-color); }
+input:checked + .slider:before { transform: translateX(26px); }
+.slider.round { border-radius: 24px; }
+.slider.round:before { border-radius: 50%; }
+
+
+/* ==========================================================
+   ⭐⭐⭐ CSS MỚI CHO LỊCH SỬ GIAO DỊCH (TABLE) ⭐⭐⭐
+   ========================================================== */
+
+.history-container {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    overflow: hidden; /* Bo góc cho cả table */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 700px; /* Đảm bảo không bị co quá nhỏ trên mobile */
+}
+
+/* Header của bảng */
+.history-table thead {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.history-table th {
+    padding: 18px 20px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--grey-color);
+    font-size: 0.95rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Các hàng dữ liệu */
+.history-table td {
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--light-color);
+    vertical-align: middle;
+    font-size: 1rem;
+}
+
+/* Hiệu ứng hover từng hàng */
+.history-table tbody tr {
+    transition: background-color 0.3s ease;
+}
+
+.history-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Cột Mã Đơn */
+.order-id {
+    font-family: monospace;
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+/* Cột Tổng Tiền */
+.order-total {
+    font-weight: bold;
+    color: #fff;
+}
+
+/* --- STATUS BADGES (Nhãn Trạng Thái) --- */
+.status-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 50px; /* Bo tròn kiểu viên thuốc */
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    min-width: 100px;
+    text-align: center;
+}
+
+/* Trạng thái: Thành công (Xanh lá) */
+.status-success {
+    background-color: rgba(46, 213, 115, 0.15);
+    color: #2ed573;
+    border: 1px solid rgba(46, 213, 115, 0.3);
+}
+
+/* Trạng thái: Đang chờ/Đã đặt (Cam/Vàng) */
+.status-pending {
+    background-color: rgba(255, 165, 2, 0.15);
+    color: #ffa502;
+    border: 1px solid rgba(255, 165, 2, 0.3);
+}
+
+/* Trạng thái: Đã hủy/Thất bại (Đỏ/Xám) */
+.status-cancel {
+    background-color: rgba(255, 71, 87, 0.15);
+    color: #ff4757;
+    border: 1px solid rgba(255, 71, 87, 0.3);
+}
+
+/* Responsive Table */
+.table-responsive {
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+.table-responsive::-webkit-scrollbar {
+    height: 6px;
+}
+.table-responsive::-webkit-scrollbar-thumb {
+    background-color: #555;
+    border-radius: 4px;
+}
+
+/* ==========================================================
+   ⭐⭐⭐ CSS MỚI CHO PHẦN THÔNG TIN CÁ NHÂN ⭐⭐⭐
+   ========================================================== */
+
+.section-title {
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    color: var(--light-color);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.profile-card {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.card-title {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.input-box {
+    display: flex;
+    align-items: center;
+    background-color: var(--dark-color);
+    border: 1px solid #444;
+    border-radius: 6px;
+    padding: 0 15px;
+    transition: all 0.3s ease;
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.input-box i {
+    color: var(--grey-color);
+    font-size: 1rem;
+    margin-right: 12px;
+}
+
+.input-box input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--light-color);
+    padding: 12px 0;
+    font-size: 1rem;
+    outline: none;
+    width: 100%;
+}
+
+.input-box:focus-within {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 8px rgba(229, 9, 20, 0.3);
+}
+.input-box:focus-within i {
+    color: var(--light-color);
+}
+
+.input-box.locked {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-color: #333;
+    cursor: not-allowed;
+}
+.input-box.locked input {
+    color: #777;
+    cursor: not-allowed;
+}
+
+.lock-icon {
+    margin-left: auto;
+    margin-right: 0 !important;
+    font-size: 0.8rem !important;
+    opacity: 0.5;
+}
+
+.security-desc {
+    color: var(--grey-color);
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    margin-top: -10px;
+}
+
+.form-actions {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.form-actions .btn {
+    padding: 10px 25px;
+    border-radius: 6px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.2s;
+}
+
+.form-actions .btn:hover {
+    transform: translateY(-2px);
+}
+
+/* ==========================================================
+   ⭐⭐⭐ CSS MỚI CHO PHẦN CÀI ĐẶT (SETTINGS) ⭐⭐⭐
+   ========================================================== */
+
+/* Item cài đặt (Mỗi dòng 1 tùy chọn) */
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Bỏ viền dòng cuối cùng trong card */
+.setting-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+.setting-item:first-child {
+    padding-top: 0;
+}
+
+.setting-info {
+    padding-right: 20px;
+}
+
+.setting-info h4 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: var(--light-color);
+    font-weight: 600;
+}
+
+.setting-info p {
+    font-size: 0.9rem;
+    color: var(--grey-color);
+    line-height: 1.4;
+}
+
+/* Nút nhỏ */
+.btn-sm {
+    padding: 6px 15px;
+    font-size: 0.9rem;
+    border-radius: 4px;
+}
+
+/* --- VÙNG NGUY HIỂM (DANGER ZONE) --- */
+.danger-card {
+    border: 1px solid rgba(231, 76, 60, 0.3);
+    background: linear-gradient(to right, rgba(231, 76, 60, 0.05), transparent);
+}
+
+.card-title.text-danger {
+    color: #e74c3c;
+    border-bottom-color: rgba(231, 76, 60, 0.2);
+}
+
+.danger-text {
+    color: #ccc;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.danger-actions {
+    text-align: right;
+}
+
+.btn-danger-outline {
+    background: transparent;
+    border: 1px solid #e74c3c;
+    color: #e74c3c;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-danger-outline:hover {
+    background-color: #e74c3c;
+    color: white;
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+}
+
+/* Responsive Chung */
+@media (max-width: 768px) {
+    .profile-container { flex-direction: column; }
+    .profile-sidebar { width: 100%; }
+    .form-group-row { flex-direction: column; gap: 0; }
+    .table-responsive { overflow-x: auto; }
+}
+
+@media (max-width: 600px) {
+    .form-actions { text-align: center; }
+    .form-actions .btn { width: 100%; justify-content: center; }
+}
+/* =========================================
+   ⭐⭐⭐ CSS CHO MODAL VÉ ĐIỆN TỬ ⭐⭐⭐
+   ========================================= */
+
+.modal-ticket {
+    display: none; /* Ẩn mặc định */
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.ticket-content {
+    background-color: #fff;
+    color: #333; /* Chữ màu tối cho dễ đọc trên nền trắng */
+    width: 90%;
+    max-width: 400px;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 0 20px rgba(229, 9, 20, 0.5);
+    background-image: radial-gradient(circle at 0 50%, transparent 10px, #fff 11px), 
+                      radial-gradient(circle at 100% 50%, transparent 10px, #fff 11px);
+    background-size: 50% 100%;
+    background-position: 0 0, 100% 0;
+    background-repeat: no-repeat;
+}
+
+.ticket-close-btn {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+    z-index: 10;
+}
+.ticket-close-btn:hover { color: #000; }
+
+.ticket-header {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 2px dashed #ddd;
+}
+.ticket-header h3 { margin: 0; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; }
+.ticket-status { font-size: 0.9rem; opacity: 0.9; margin-top: 5px; }
+
+.ticket-body {
+    padding: 20px 30px;
+}
+
+.t-movie-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--dark-color);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.ticket-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.t-item label {
+    display: block;
+    font-size: 0.8rem;
+    color: #666;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+}
+.t-item span {
+    font-weight: bold;
+    font-size: 1rem;
+    color: #000;
+}
+.t-item span.highlight {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+.ticket-qr {
+    text-align: center;
+    margin-top: 10px;
+    padding-top: 15px;
+    border-top: 2px dashed #eee;
+}
+.ticket-qr img {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 10px;
+}
+.ticket-qr p { font-size: 0.8rem; color: #888; }
+
+.ticket-footer {
+    background-color: #f9f9f9;
+    padding: 15px;
+    text-align: center;
+    border-top: 1px solid #eee;
+    font-size: 1.1rem;
+}
+
+/* Nút xem vé trong bảng */
+.btn-view-ticket {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+.btn-view-ticket:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}

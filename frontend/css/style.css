@@ -1,0 +1,54 @@
+/* Reset CSS cơ bản */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    line-height: 1.6;
+}
+
+a {
+    color: var(--light-color);
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+main {
+    /* Tạo khoảng trống cho header cố định */
+    padding-top: var(--header-height); 
+}
+
+.movie-list-container {
+    padding: 20px 4%;
+}
+
+.movie-list-container h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.movie-grid {
+    display: grid;
+    /* Tự động chia cột, mỗi cột tối thiểu 200px */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+.movie-card-link {
+    text-decoration: none; /* Bỏ gạch chân */
+    color: inherit; /* Kế thừa màu chữ (màu trắng) */
+}

@@ -1,0 +1,173 @@
+/* --- Trang Chi Tiết Phim --- */
+
+.movie-detail-container {
+    position: relative;
+    width: 100%;
+    min-height: 80vh;
+    padding: 4% 6%;
+    display: flex;
+    align-items: center; /* Căn giữa theo chiều dọc */
+    overflow: hidden;
+}
+
+/* Lớp ảnh nền mờ (Backdrop) */
+.detail-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center top;
+    filter: blur(10px) brightness(0.5); /* Hiệu ứng mờ và tối */
+    transform: scale(1.1); /* Phóng to để viền mờ đẹp hơn */
+    z-index: 1;
+}
+
+/* Lớp phủ mờ ở dưới (giống banner) */
+.movie-detail-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(20,20,20,1) 15%, rgba(20,20,20,0) 60%);
+    z-index: 2;
+}
+
+/* Nội dung chính (phải đè lên trên) */
+.detail-content {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: flex-start; /* Căn poster và info ở trên */
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: var(--header-height); /* Thêm khoảng trống cho header */
+}
+
+.detail-poster {
+    flex-shrink: 0; /* Không co lại */
+}
+
+.detail-poster img {
+    width: 300px;
+    max-width: 40vw; /* Đảm bảo không quá to trên mobile */
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.detail-info {
+    max-width: 600px;
+}
+
+.detail-info h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.detail-info #detail-year {
+    font-size: 1.2rem;
+    color: var(--grey-color);
+    margin-bottom: 20px;
+}
+
+.detail-info .detail-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.detail-actions .btn {
+    font-size: 1.1rem;
+    padding: 12px 28px;
+}
+
+/* --- Responsive cho trang chi tiết --- */
+@media (max-width: 768px) {
+    .detail-content {
+        flex-direction: column; /* Xếp dọc trên mobile */
+        align-items: center; /* Căn giữa poster */
+        text-align: center;
+        margin-top: 20px; /* Giảm margin top */
+    }
+
+    .detail-info h1 {
+        font-size: 2.2rem;
+    }
+
+    .detail-info .detail-description {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .detail-actions .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+/* --- Thêm kiểu dáng cho thông tin chi tiết (Giống ảnh) --- */
+/* (Thêm đoạn này vào cuối file css/movie-detail.css) */
+
+/* Nhóm (Năm | Thời lượng | Rating) */
+.detail-meta-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--grey-color);
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+.detail-meta-group #detail-rating {
+    /* Tạo ô vuông giống trong ảnh */
+    border: 1px solid var(--grey-color);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--light-color);
+}
+
+.detail-meta-group .meta-separator {
+    font-size: 1rem;
+}
+
+/* Danh sách (Thể loại, Đạo diễn, Diễn viên) */
+.detail-metadata-list {
+    margin-bottom: 30px;
+    /* Thêm đường gạch ngang mờ */
+    border-top: 1px solid rgba(140, 140, 140, 0.3);
+    padding-top: 20px;
+}
+
+.meta-item {
+    display: flex;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    line-height: 1.5; /* Giúp hiển thị đẹp hơn nếu danh sách diễn viên quá dài */
+}
+
+.meta-item .meta-label {
+    color: var(--grey-color);
+    width: 100px; /* Cố định chiều rộng cho label */
+    flex-shrink: 0; /* Không bị co lại */
+}
+
+.meta-item .meta-value {
+    color: var(--light-color);
+}
+
+/* Sửa lại CSS cũ trên mobile để dành chỗ cho thông tin mới */
+@media (max-width: 768px) {
+    .detail-metadata-list {
+        text-align: left; /* Căn trái lại danh sách metadata cho dễ đọc */
+    }
+    .meta-item {
+        font-size: 1rem;
+    }
+}

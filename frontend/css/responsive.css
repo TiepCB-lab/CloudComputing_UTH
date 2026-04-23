@@ -1,0 +1,54 @@
+@media (max-width: 768px) {
+    .main-nav {
+        display: none; /* Ẩn menu nav trên mobile cho đơn giản */
+    }
+
+    .banner-content {
+        max-width: 80%;
+    }
+
+    .banner-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .movie-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 15px;
+    }
+
+    .movie-card-img {
+        height: 220px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.5rem;
+    }
+
+    .search-box {
+        display: none; /* Ẩn ô tìm kiếm trên mobile nhỏ */
+    }
+
+    .banner-content h1 {
+        font-size: 2rem;
+    }
+
+    .banner-content p {
+        display: none; /* Ẩn mô tả phim trên mobile nhỏ */
+    }
+
+    .btn {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+
+    .movie-grid {
+        /* Hiển thị 2 cột trên mobile */
+        grid-template-columns: repeat(2, 1fr); 
+    }
+
+    .movie-card-img {
+        height: 250px;
+    }
+}

@@ -1,0 +1,387 @@
+/* === NỘI DUNG CSS MỚI CHO TRANG BOOKING === */
+.booking-container {
+    display: flex;
+    flex-wrap: wrap; 
+    max-width: 1400px;
+    margin: 20px auto;
+    padding: 0 4%;
+    gap: 30px;
+    color: #fff;
+}
+.booking-main {
+    flex: 1;
+    min-width: 600px;
+    background-color: var(--light-dark-color);
+    padding: 30px;
+    border-radius: 8px;
+}
+.booking-main h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--grey-color);
+    padding-bottom: 10px;
+}
+.date-selector {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px; /* Giảm margin */
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+.date-item {
+    background-color: var(--dark-color);
+    border: 1px solid var(--grey-color);
+    color: var(--light-color);
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    min-width: 100px;
+    text-align: center;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+.date-item:hover {
+    background-color: #333;
+}
+.date-item.selected {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: #fff;
+    font-weight: bold;
+}
+
+/* === CSS MỚI: Dải chọn suất chiếu === */
+.showtime-title {
+    font-size: 1.2rem;
+    color: var(--grey-color);
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+.showtime-selector {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    flex-wrap: wrap; /* Cho phép xuống hàng */
+}
+.time-item {
+    background-color: var(--dark-color);
+    border: 1px solid var(--grey-color);
+    color: var(--light-color);
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s, border-color 0.3s;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+.time-item:hover {
+    background-color: #333;
+}
+.time-item.selected {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: #fff;
+}
+/* === Kết thúc CSS MỚI === */
+
+.screen {
+    background-color: #fff;
+    color: #000;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border-radius: 4px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+.seat-map {
+    display: grid;
+    grid-template-columns: repeat(14, 1fr); 
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.seat {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.7rem;
+    transition: background-color 0.2s;
+    background-color: #444;
+    border: 1px solid #666;
+}
+.seat.available:hover {
+    background-color: #666;
+}
+.seat.booked {
+    background-color: #222;
+    border-color: #333;
+    color: #666;
+    cursor: not-allowed;
+}
+.seat.selected {
+    background-color: var(--primary-color);
+    border-color: #ff5555;
+    font-weight: bold;
+}
+.seat.gap {
+    visibility: hidden;
+    cursor: default;
+}
+.seat-legend {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--grey-color);
+    padding-top: 20px;
+}
+.legend-item {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+.legend-box {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+}
+
+/* === CSS MỚI: Phần chọn Combo Bắp/Nước === */
+.combo-section {
+    margin-top: 30px;
+    border-top: 1px solid var(--grey-color);
+    padding-top: 20px;
+}
+.combo-section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+.combo-item {
+    display: flex;
+    align-items: center;
+    background-color: var(--dark-color);
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+.combo-item img {
+    width: 60px;
+    height: 60px;
+    border-radius: 4px;
+    margin-right: 15px;
+    object-fit: cover;
+}
+.combo-info {
+    flex: 1; /* Đẩy bộ đếm sang phải */
+}
+.combo-info h4 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+.combo-info p {
+    font-size: 1rem;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+.combo-quantity-selector {
+    display: flex;
+    align-items: center;
+}
+.quantity-btn {
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+.quantity-btn:disabled {
+     background-color: #555;
+     cursor: not-allowed;
+}
+.quantity-display {
+    width: 40px;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--light-color);
+}
+/* === Kết thúc CSS MỚI === */
+
+
+.booking-sidebar {
+    flex-basis: 350px;
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+}
+.movie-info-card {
+    background-color: var(--light-dark-color);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+.movie-info-card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+.movie-info-content {
+    padding: 20px;
+}
+.movie-info-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+.movie-info-content p {
+    font-size: 0.9rem;
+    color: var(--grey-color);
+    margin-bottom: 5px;
+}
+.customer-info-box, .summary-box {
+    background-color: var(--light-dark-color);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.customer-info-box h3, .summary-box h3 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--grey-color);
+}
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid var(--grey-color);
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    font-size: 1rem;
+}
+
+/* === CSS CẬP NHẬT: Tóm tắt đặt vé === */
+.summary-details {
+    border-bottom: 1px dashed var(--grey-color);
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+.summary-details:last-of-type {
+    border-bottom: none;
+}
+.summary-box h3 {
+    border-bottom: 1px solid var(--grey-color);
+    padding-bottom: 10px;
+}
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 1rem; /* Giảm font size cho chi tiết */
+}
+.summary-item span:first-child {
+    color: var(--grey-color);
+    margin-right: 10px;
+}
+.summary-item span:last-child {
+    font-weight: 600;
+    color: var(--light-color);
+    white-space: nowrap; /* Tránh vỡ dòng */
+}
+/* CSS cho mục ghế */
+#selected-list {
+    color: var(--light-color);
+    font-weight: 600;
+    word-break: break-all; /* Xuống hàng nếu quá nhiều ghế */
+}
+/* CSS cho danh sách combo (JS tạo ra) */
+#combo-summary-list .summary-item span:first-child {
+    color: var(--light-color); /* Màu trắng cho tên combo */
+}
+
+.summary-total {
+    border-top: 1px solid var(--grey-color);
+    padding-top: 15px;
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+/* === Kết thúc CSS CẬP NHẬT === */
+
+
+#confirm-booking {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.2rem;
+}
+#booking-message {
+    margin-top: 15px;
+    color: #4caf50;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* === CSS RESPONSIVE RIÊNG CỦA BOOKING (TỪ booking.css) === */
+@media (max-width: 1024px) {
+    .booking-main {
+        min-width: 100%;
+        order: 1;
+    }
+    .booking-sidebar {
+        flex-basis: 100%;
+        position: static;
+        order: 2;
+    }
+    .seat-map {
+        grid-template-columns: repeat(14, 1fr);
+        gap: 5px;
+    }
+    .seat {
+        font-size: 0.6rem;
+    }
+}
+@media (max-width: 640px) { /* Thêm breakpoint cho combo */
+     .booking-main {
+        padding: 15px;
+    }
+    .combo-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .combo-quantity-selector {
+        margin-top: 10px;
+        align-self: flex-end; /* Đẩy bộ đếm sang phải */
+    }
+}
+@media (max-width: 480px) {
+    .seat-map {
+        gap: 3px;
+    }
+    .seat {
+        border-radius: 4px;
+    }
+}

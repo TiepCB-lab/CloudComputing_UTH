@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt Vé - Web Xem Phim</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <link rel="stylesheet" href="css/booking.css">
+    
+</head>
+<body>
+
+    <header class="main-header">
+        <a href="index.html" class="logo">GemFlix</a>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Trang Chủ</a></li>
+                <li><a href="movies.html">Phim Lẻ</a></li>
+                <li><a href="movies.html">Phim Bộ</a></li>
+                <li><a href="movies.html">Mới & Phổ Biến</a></li>
+            </ul>
+        </nav>
+        
+        <div class="header-right">
+            <div class="user-menu">
+                <button id="user-menu-btn" class="user-menu-btn" title="Tài khoản">
+                    <i class="fa-solid fa-user"></i> 
+                </button>
+                <div class="user-dropdown" id="user-dropdown">
+                    <a href="login.html">Đăng nhập</a>
+                    <a href="register.html">Đăng kí</a>
+                </div>
+            </div>
+            
+            <div class="search-box">
+                <input id="header-search-input" type="text" placeholder="Tìm kiếm...">
+                <i id="header-search-btn" class="fa-solid fa-magnifying-glass" title="Tìm kiếm"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="booking-container">
+            
+            <section class="booking-main">
+                <h2 id="booking-title">Chọn Ngày & Chỗ Ngồi</h2>
+                
+                <div id="date-selector" class="date-selector" aria-label="Chọn ngày">
+                    </div>
+                
+                <h3 class="showtime-title">Chọn Suất Chiếu</h3>
+                <div id="showtime-selector" class="showtime-selector">
+                    </div>
+                
+                <div class="screen">Màn hình</div>
+                
+                <div id="seat-map" class="seat-map">
+                    Đang tải sơ đồ chỗ ngồi...
+                </div>
+                
+                <div class="seat-legend">
+                    <div class="legend-item">
+                        <div class="legend-box" style="background-color: #444; border: 1px solid #666;"></div> Trống
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-box" style="background-color: #222; border-color: #333;"></div> Đã đặt
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-box" style="background-color: var(--primary-color); border-color: #ff5555;"></div> Đang chọn
+                    </div>
+                </div>
+
+                <div class="combo-section">
+                    <h3>Chọn Bắp & Nước</h3>
+                    <div id="combo-list-container">
+                        </div>
+                </div>
+            </section>
+
+            <aside class="booking-sidebar">
+                
+                <div class="movie-info-card" id="movie-info-placeholder">
+                    <img id="movie-poster" src="" alt="Poster phim" style="display: none;">
+                    <div class="movie-info-content">
+                        <h3 id="movie-title">Đang tải...</h3>
+                        <p id="movie-year-rating">Năm: ... | Rating: ...</p>
+                        <p id="movie-duration-genre">Thời lượng: ... | Thể loại: ...</p>
+                    </div>
+                </div>
+
+                <div class="customer-info-box">
+                    <h3>Thông tin của bạn</h3>
+                    <div class="form-group">
+                        <label for="cust-name">Họ và tên</label>
+                        <input id="cust-name" type="text" placeholder="Nguyễn Văn A">
+                    </div>
+                    <div class="form-group">
+                        <label for="cust-phone">Số điện thoại</label>
+                        <input id="cust-phone" type="text" placeholder="0901234567">
+                    </div>
+                </div>
+
+                <div class="summary-box">
+                    <h3>Tóm tắt đặt vé</h3>
+                    
+                    <div class="summary-details">
+                        <div class="summary-item">
+                            <span>Ghế: <span id="selected-list">(chưa chọn)</span></span>
+                            <span id="selected-seats-total">0 VND</span>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-details" id="combo-summary-list">
+                        </div>
+
+                    <div class="summary-total">
+                        <span>Tổng cộng:</span>
+                        <span id="total-price">0 VND</span>
+                    </div>
+                    
+                    <button id="confirm-booking" class="btn btn-primary" style="margin-top: 20px;">Tiếp Tục</button>
+                    <div id="booking-message"></div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2025 Web Xem Phim. Mọi bản quyền thuộc về bạn.</p>
+    </footer>
+
+    <div class="modal-trailer" id="trailer-modal">
+        <div class="modal-content">
+            <span class="modal-close" id="modal-close-btn">&times;</span>
+            <div class="video-container">
+                <iframe id="trailer-iframe" 
+                        src="" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/booking.js"></script>
+</body>
+</html>
