@@ -1,5 +1,5 @@
 // ======================= CONFIG API ==========================
-const API_BASE_URL = "http://localhost/LT-Web_Dat-Ve-Xem-Phim/backend/api";
+const API_BASE_URL = "/backend/api";
 
 // ======================= MAIN APP ============================
 document.addEventListener("DOMContentLoaded", async () => {

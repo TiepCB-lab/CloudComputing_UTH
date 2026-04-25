@@ -1,6 +1,6 @@
 /* === FILE: frontend/js/auth.js === */
 
-const API_AUTH_URL = "http://localhost/LT-Web_Dat-Ve-Xem-Phim/backend/api/auth";
+const API_AUTH_URL = "/backend/api/auth";
 
 document.addEventListener('DOMContentLoaded', async () => {
     // 1. Setup các hiệu ứng giao diện (luôn chạy)
